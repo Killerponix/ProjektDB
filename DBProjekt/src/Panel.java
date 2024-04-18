@@ -29,6 +29,11 @@ public class Panel {
     public void setPanel(JPanel panel) {
         this.panel = panel;
     }
+
+    /**Damit kann ein belibiges Object dem Panel Hinzugefügt werden
+     *
+     * @param component Die hinzufügende Komponente
+     */
     public void addObject(JComponent component){
         this.panel.add(component);
     }

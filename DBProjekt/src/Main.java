@@ -1,3 +1,12 @@
+/*Created by Killerponix (Simon Garb) and Simon Schmidt
+ *
+ * This Program is build as project for the module Datenbanken und Datensicherheit hosted by Prof. Peter Gerwinski
+ * This Program is a Database Manger which is connected to a MSQL Database Server and can change, display, add and delte elemts from it
+ *
+ */
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,6 +48,10 @@ public class Main {
 
     }
 
+    /**Funktion wird eigentlich nicht mehr genutzt, kann aber genutzt werdeb um die Main zu verkürzen
+     * Status der benutzung kann sich jederzeit ändern
+     * @param frame
+     */
     static void createGUI(JFrame frame) {
          frame = new JFrame("MYSQL Database Manager");
         frame.setName("MYSQL Database Manager");

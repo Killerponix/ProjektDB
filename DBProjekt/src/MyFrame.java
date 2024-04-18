@@ -3,11 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**Klasse Myframe erstellen , damit ein Frame erstellt wird,
+ * diesem wird Panels hinzugefügt, diesen müssen die einzelen Elemente hinzugefügt werden
+ *
+ */
 public class MyFrame{
    private JFrame frame;
    private int id;
    private Button but;
 
+    /**Konstruktor für MyFrame
+     *
+     * @param id ID des Frames
+     */
     public MyFrame(int id) {
         this.id=id;
         this.frame = new JFrame();
