@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Main {
@@ -7,13 +9,31 @@ public class Main {
       MyFrame App = new MyFrame(1);
       Panel panel1,panel2,panel3;
       Button but1, but2, but3, but4, but5, but6;
+      ActionListener listener = null;
+//        ActionListener listener = new ActionListener() {
+//            int id;
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("Test");
+//                if (e.getSource()instanceof Button){
+//                    System.out.println("BUtton");
+//                }
+//                if (id==0){
+//
+//                }
+//            }
+//        };
+
       panel1 =new Panel(1);
         but1 = new Button(1);
+        but2 = new Button(2);
         App.setupFrame();
         //createGUI(App.getFrame());
         panel1.setupPanel(0,0,800,600);
         but1.setupbutton(0,0,200,80,"Dies ist ein Test");
-        panel1.addButton(but1.getBut());
+        but2.setupbutton(200,80,200,80,"Dies ist ein Test");
+        panel1.addObject(but1.getBut());
+        panel1.addObject(but2.getBut());
         App.addPanel(panel1.getPanel());
 
 

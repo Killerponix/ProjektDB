@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Button {
+public class Button implements ActionListener {
     private int id;
     private JButton but;
 
@@ -25,6 +27,19 @@ public class Button {
     public void setBut(JButton but) {
         this.but = but;
     }
+    public void addlistener(){
+        ActionListener listener = e -> {
+            switch (id) {
+                case 1:
+                    System.out.println("1");
+                    break;
+                case 2:
+                    System.out.println("2");
+                    break;
+            }
+        };
+        this.but.addActionListener(listener);
+    }
     public void setupbutton(int x, int y,int w,int h, String text) {
         this.but.setBorderPainted(true);
         this.but.setBackground(Color.red);
@@ -37,8 +52,14 @@ public class Button {
         this.but.setLocation(x, y);
         this.but.setMinimumSize(new Dimension(200,80));
         this.but.setText(text);
+        addlistener();
         this.but.setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Test");
+
+    }
 }
 

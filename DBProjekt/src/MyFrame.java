@@ -75,7 +75,7 @@ public class MyFrame{
      * @param but
      */
     public void addButton(Button but){
-
+        this.frame.add(but.getBut());
     }
     public void addPanel(JPanel panel){
         this.frame.add(panel);
