@@ -13,7 +13,7 @@ public class MySQL {
     private Connection con;
 
     public boolean isConnected() {
-        return (con == null ? false : true);
+        return (con != null);
     }
 
     public void connect() {
