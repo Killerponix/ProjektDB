@@ -4,13 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MySQL {
-    private final String host = "SimonPC";
-    private final String port = "3306";
-    private final String database = "belegschaft";
-    private final String username = "Simon";
-    private final String password = "CVH";
-
-    private Connection con;
+    private static String host = "SimonPC";
+    private static String port = "3306";
+    private static String database = "belegschaft";
+    private static String username = "Simon";
+    private static String password = "CVH";
+    private static Connection con;
 
     public boolean isConnected() {
         return (con != null);
@@ -68,5 +67,49 @@ public class MySQL {
             e.printStackTrace();
 
         }
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public static String getDatabase() {
+        return database;
     }
 }

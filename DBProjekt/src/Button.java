@@ -1,23 +1,34 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Button {
+public class Button extends Component{
     private int id;
     private JButton but;
+    private static JComponent [] listto;
+    private static int compI =0;
+    private JTextField [] JTlogin =new JTextField[3];
 
     /**Erzeugung eines Buttons
      *
      * @param id ID für erkennung des Buttons
      */
     public Button(int id){
+        super(id);
         this.id=id;
         this.but = new JButton();
     }
 
     public int getId() {
         return id;
+    }
+    public void ListenToText(JComponent jComponent){
+        JTlogin[compI] = (JTextField) jComponent;
+        compI++;
+//        System.out.println(jComponent);
+//
+//                listto[compI].add(jComponent);
+//        System.out.println(listto[compI]);
     }
 
     public JButton getBut() {
@@ -54,7 +65,16 @@ public class Button {
                         break;
                     case 6:
                         ausg=!ausg;
-                        System.out.println("6");
+                        MySQL sql = new MySQL();
+                        sql.setUsername(JTlogin[0].getText());
+                        sql.setPassword(JTlogin[1].getText());
+//                        sql.setHost(JTlogin[2].getText());
+                        System.out.println(sql.getUsername());
+                        System.out.println(sql.getPassword());
+                        System.out.println("Button 6");
+//                        while(!sql.isConnected()){
+//                            sql.connect();
+//                        }
                         break;
                 }
             }

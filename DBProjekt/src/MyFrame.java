@@ -21,6 +21,7 @@ public class MyFrame  implements ActionListener, KeyListener,Runnable{
     public MyFrame(int id) {
         this.id=id;
         this.frame = new JFrame();
+        run();
         /*   Border border = BorderFactory.createLineBorder(Color.green,3);
         JButton button = new JButton();
         button.setText("Dies ist ein BUttion");
@@ -88,6 +89,7 @@ public class MyFrame  implements ActionListener, KeyListener,Runnable{
        // this.frame.add(but.getBut());
         but.getBut().addActionListener(this::actionPerformed);
     }
+
     public void addPanel(Panel panel){
         this.frame.add(panel.getPanel());
     //    System.out.println(this.frame);
@@ -96,7 +98,6 @@ public class MyFrame  implements ActionListener, KeyListener,Runnable{
 
     public void addComponent(JTextField jTf){
         jTf.addActionListener(this::actionPerformed);
-
     }
 
 
@@ -123,7 +124,14 @@ public class MyFrame  implements ActionListener, KeyListener,Runnable{
 
     @Override
     public void run() {
-        System.out.println("Test");
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               while (true){
+
+               }
+           }
+       }).start();
     }
 
 

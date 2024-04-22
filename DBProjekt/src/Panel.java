@@ -1,10 +1,11 @@
 import javax.swing.*;
 
-public class Panel {
+public class Panel extends Component {
     private int id;
     private JPanel panel;
 
     public Panel(int id){
+        super(id);
         this.id=id;
         this.panel= new JPanel();
     }
