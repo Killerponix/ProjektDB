@@ -12,8 +12,14 @@ import java.awt.event.ActionListener;
 public class Main{
    public static boolean connected =false;
     public static void main(String[] args) {
-    App app = new App();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                App app = new App();
+            }
+        }).start();
     }
+
 
 
 }

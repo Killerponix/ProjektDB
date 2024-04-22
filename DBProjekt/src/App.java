@@ -16,15 +16,15 @@ public class App implements Runnable{
 //      DB.update();
 //      DB.disconnect();
         MyFrame App = new MyFrame(1);
-
         Panel panel1,panel2,panel3;
         Button but1, but2, but3, but4, but5, but6;
         ActionListener listener = null;
         panel1 =new Panel(1);
         but1 = new Button(1);
         but2 = new Button(2);
-        App.setupFrame();
 
+
+        App.setupFrame();
         //        createGUI(App.getFrame());
 //        panel1.setupPanel(0,0,800,600);
 //        but1.setupbutton(0,0,200,80,"Dies ist ein Test");
@@ -32,12 +32,13 @@ public class App implements Runnable{
 //        panel1.addObject(but1.getBut());
 //        panel1.addObject(but2.getBut());
 //        App.addPanel(panel1);
-        System.out.println(DB.getUsername() + DB.getPassword());
-        createLogin(App);
+//        createLogin(App);
         createSidePanel(App);
+        createMainPanel(App);
 
     }
-    static void createLogin(MyFrame frame){
+
+    void createLogin(MyFrame frame){
         Panel loginPanel = new Panel(3);
         Button Bconnect = new Button(6);
         Bconnect.setupbutton(1280/2-75,540,150,75,"Connect");
@@ -122,17 +123,27 @@ public class App implements Runnable{
 
 
     }
-    static Object[] createSidePanel(MyFrame frame){
-        Panel jpConnect = new Panel(2);
+
+
+
+    void createMainPanel(MyFrame frame){
+        Panel jpMain = new Panel(2);
+        jpMain.setupPanel(0,0,900,680);
+        jpMain.getPanel().setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), "Main"));
+        frame.addPanel(jpMain);
+    }
+
+    Object[] createSidePanel(MyFrame frame){
+        Panel jpConnect = new Panel(3);
         Button but = new Button(3);
         but.setupbutton(100,100,80,40,"BUtton3");
 //        but.addlistener();
 //        frame.addButton(but);
         jpConnect.addButton(but.getBut());
-
+        jpConnect.setupPanel(1000,0,280,680);
         jpConnect.getPanel().setLayout(null);
-        jpConnect.getPanel().setBounds(800, 0, 460, 680);
-        jpConnect.getPanel().setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), "Connection Control"));
+        jpConnect.getPanel().setBounds(1000, 0, 280, 680);
+        jpConnect.getPanel().setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), "Control"));
 
 
         JTextField jtfIP = new JTextField();
