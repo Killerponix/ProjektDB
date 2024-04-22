@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+import static java.lang.Thread.*;
+
 public class App implements Runnable{
     public App() {
         run();
@@ -32,7 +34,7 @@ public class App implements Runnable{
 //        App.addPanel(panel1);
         System.out.println(DB.getUsername() + DB.getPassword());
         createLogin(App);
-//        createSidePanel(App);
+        createSidePanel(App);
 
     }
     static void createLogin(MyFrame frame){
@@ -88,6 +90,15 @@ public class App implements Runnable{
         loginPanel.getPanel().setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), "Connection Control"));
         loginPanel.getPanel().updateUI();
         frame.addPanel(loginPanel);
+        while (!Bconnect.isPressed()){
+            try {
+                System.out.println("NoT Pressed");
+                sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        loginPanel.changeVisible();
 
 
     }

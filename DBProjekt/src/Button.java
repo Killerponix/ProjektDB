@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 public class Button extends Component{
     private int id;
+    private boolean state;
     private JButton but;
     private static JComponent [] listto;
     private static int compI =0;
@@ -18,6 +19,10 @@ public class Button extends Component{
         this.id=id;
         this.but = new JButton();
     }
+    public boolean isPressed(){
+        return state;
+    }
+
 
     public int getId() {
         return id;
@@ -65,6 +70,7 @@ public class Button extends Component{
                         break;
                     case 6:
                         ausg=!ausg;
+                        state=true;
                         MySQL sql = new MySQL();
                         sql.setUsername(JTlogin[0].getText());
                         sql.setPassword(JTlogin[1].getText());

@@ -6,6 +6,12 @@ public class Component {
     public Component(int id) {
         this.id = id;
     }
+    Button createButton(int id){
+        Button but = new Button(id);
+        comp =but.getBut();
+        return but;
+    }
+
 
     public int getId() {
         return id;
