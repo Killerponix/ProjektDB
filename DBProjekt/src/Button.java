@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Button extends Component{
+public class Button{
     private int id;
     private boolean state;
     private JButton but;
@@ -12,11 +12,12 @@ public class Button extends Component{
 
     /**Erzeugung eines Buttons
      *
-     * @param id ID für erkennung des Buttons
+     *  ID für erkennung des Buttons
+     *
+     *  Deprecated: gibt keine ID MEHR
      */
-    public Button(int id){
-        super(id);
-        this.id=id;
+    public Button(){
+        super();
         this.but = new JButton();
     }
     public boolean isPressed(){
@@ -112,5 +113,23 @@ public class Button extends Component{
         addlistener();
         this.but.setVisible(true);
     }
+
+    public JButton setupbutton(int x, int y,int w,int h, String text, JButton but) {
+        but.setBorderPainted(true);
+        but.setBackground(Color.red);
+        but.setForeground(Color.cyan);
+        but.setBounds(x, y, w, h);
+        but.setFocusable(true);
+        // but.setMargin(new Insets(100, 100, 100, 100));
+        //    this.but.addActionListener(this);
+        but.setSize(w,h );
+        but.setLocation(x, y);
+        but.setMinimumSize(new Dimension(20,8));
+        but.setText(text);
+        //addlistener();
+        but.setVisible(true);
+        return but;
+    }
+
 }
 

@@ -1,12 +1,10 @@
 import javax.swing.*;
 
-public class Panel extends Component {
+public class Panel {
     private int id;
     private JPanel panel;
 
-    public Panel(int id){
-        super(id);
-        this.id=id;
+    public Panel(){
         this.panel= new JPanel();
     }
 
@@ -14,7 +12,6 @@ public class Panel extends Component {
         this.panel.setBounds(x, y, w, h);
         this.panel.setVisible(true);
     }
-
     public int getId() {
         return id;
     }

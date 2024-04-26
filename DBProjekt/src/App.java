@@ -1,30 +1,52 @@
+import javax.security.auth.callback.Callback;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.concurrent.*;
 
 import static java.lang.Thread.*;
 
-public class App implements Runnable{
+public class App extends MyFrame implements Runnable, ActionListener{
     public App() {
+        super();
         run();
     }
 
+    JButton connect;
+    JTextField JTFUser,JTFAdr;
+    JPasswordField JTFPW;
+    boolean connected=false;
+    MySQL DB = new MySQL();
+
+
     @Override
     public void run() {
-        MySQL DB = new MySQL();
+
 //        DB.connect();
 //      DB.update();
 //      DB.disconnect();
-        MyFrame App = new MyFrame(1);
-        Panel panel1,panel2,panel3;
-        Button but1, but2, but3, but4, but5, but6;
-        ActionListener listener = null;
-        panel1 =new Panel(1);
-        but1 = new Button(1);
-        but2 = new Button(2);
+       MyFrame App = new MyFrame();
+       Button but = new Button();
+        JFrame frame = new JFrame();
+        frame = App.setupFrame(frame);
+        JPanel loginpanel = new JPanel();
+        loginpanel =loginpanel(loginpanel);
+        frame.add(loginpanel);
+        JPanel Jpmain= new JPanel();
+        while (connected == false){
+            try {
+                sleep(1000);
+                System.out.println("Login STILL");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        loginpanel.setVisible(false);
+        Jpmain = MainPanel(Jpmain);
+        frame.add(Jpmain);
 
-
-        App.setupFrame();
         //        createGUI(App.getFrame());
 //        panel1.setupPanel(0,0,800,600);
 //        but1.setupbutton(0,0,200,80,"Dies ist ein Test");
@@ -33,11 +55,124 @@ public class App implements Runnable{
 //        panel1.addObject(but2.getBut());
 //        App.addPanel(panel1);
 //        createLogin(App);
-        createSidePanel(App);
-        createMainPanel(App);
+//        createSidePanel(App);
+//        createMainPanel(App);
+
+    }//RUN
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source= e.getSource();
+        System.out.println("Irgendetwas");
+        if (source==connect){
+            String us = JTFUser.getText();
+            String pw= Arrays.toString(JTFPW.getPassword());
+            String adr = JTFAdr.getText();
+            System.out.println(us+" "+pw+" "+adr);
+//            DB.connect();
+            if (DB.isConnected()){
+                connected=true;
+            }else {
+                System.out.println("Not Connected, aber egal, WEITER");
+                connected=true;
+            }
+        }else if (false){
+
+        }
 
     }
 
+    public JButton setupbutton(int x, int y, int w, int h, String text, JButton but) {
+        but.setBorderPainted(true);
+        but.setBackground(Color.red);
+        but.setForeground(Color.cyan);
+        but.setBounds(x, y, w, h);
+        but.setFocusable(true);
+        but.addActionListener(this::actionPerformed);
+        // but.setMargin(new Insets(100, 100, 100, 100));
+        //    this.but.addActionListener(this);
+        but.setSize(w,h);
+        but.setLocation(x, y);
+        but.setMinimumSize(new Dimension(200,80));
+        but.setText(text);
+        //addlistener();
+        but.setVisible(true);
+        return but;
+    }
+
+    public JPanel loginpanel(JPanel loginPanel){
+        loginPanel.setBounds(0,0,922,680);
+        loginPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), "Connection Control"));
+        connect = new JButton();
+        connect = setupbutton(1280/2-75,540,150,75,"Connect",connect);
+
+        JTFUser = new JTextField();
+        JLabel JLUser = new JLabel("Username");
+        JLUser.setBounds(20, 40, 120, 20);
+        JTFUser.setBounds(20, 60, 120, 26);
+        JTFUser.setLocation(20,60);
+        JLUser.setLocation(20,40);
+        JTFUser.setHorizontalAlignment(JTextField.CENTER);
+
+        JTFPW = new JPasswordField();
+        JLabel JLPW = new JLabel("Password");
+        JLPW.setBounds(120, 40, 120, 20);
+        JLPW.setLocation(120,40);
+        JTFPW.setBounds(120, 60, 120, 26);
+        JTFPW.setLocation(20,160);
+        JLPW.setLocation(20,140);
+        JTFPW.setHorizontalAlignment(JTextField.CENTER);
+
+        JTFAdr = new JTextField();
+        JLabel JLAdr = new JLabel("Adresse");
+        JLAdr.setBounds(20, 40, 120, 20);
+        JTFAdr.setBounds(20, 60, 120, 26);
+        JTFAdr.setLocation(20,260);
+        JLAdr.setLocation(20,240);
+        JTFAdr.setHorizontalAlignment(JTextField.CENTER);
+//        JTFPW.addActionListener(this::actionPerformed);
+//        JTFUser.addActionListener(this::actionPerformed);
+//        JTFAdr.addActionListener(this::actionPerformed);
+
+        loginPanel.add(JLAdr);
+        loginPanel.add(JLPW);
+        loginPanel.add(JLUser);
+        loginPanel.add(JTFUser);
+        loginPanel.add(JTFPW);
+        loginPanel.add(JTFAdr);
+        loginPanel.add(connect);
+        loginPanel.setVisible(true);
+
+
+        loginPanel.updateUI();
+        return loginPanel;
+    }
+
+    public JPanel MainPanel(JPanel panel){
+        panel.setBounds(0,0,1240,680);
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), "Main"));
+        panel.setBounds(0,0,1280,720);
+        panel.setVisible(true);
+        return panel;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//<<<<<<<<<<<<<<<<<----------------------------------------- Alter Code Bis commit MainPanel ------------------------------>>>>>>>>>>>>>>>>>
+/*
     void createLogin(MyFrame frame){
         Panel loginPanel = new Panel(3);
         Button Bconnect = new Button(6);
@@ -103,17 +238,14 @@ public class App implements Runnable{
 
 
     }
-
-
-
     /**Funktion wird eigentlich nicht mehr genutzt, kann aber genutzt werdeb um die Main zu verkürzen
      * Status der benutzung kann sich jederzeit ändern
      * **--Edit 20.04.24-- Funkton wird umfunktioniert
      * Deswegen wieder in Verwendung
      *
      * @param frame
-     */
-    static void createGUI(MyFrame frame) {
+
+static void createGUI(MyFrame frame) {
 //         frame = new JFrame("MYSQL Database Manager");
 //        frame.setName("MYSQL Database Manager");
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,9 +254,7 @@ public class App implements Runnable{
 //        frame.setVisible(true);
 
 
-    }
-
-
+}
 
     void createMainPanel(MyFrame frame){
         Panel jpMain = new Panel(2);
@@ -164,31 +294,32 @@ public class App implements Runnable{
     }
     //IDK ob ich es so mache, oder ob ich die Strukturn ochmal überarbeite, damit der Action listener auch funktioniert, bzw. damit man auf die Objekte die dort erstellt weden noch zugreifen kann, muss maN für die dann noch eine referenz haben
     // Gemeint ist die Rückgabe mit Object[]
-  /*  @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Test");
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println("Test");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("Test");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("Test");
-    }
-
-    @Override
-    }*/
-    public void setConnected(){
-        System.out.println("TRUE");
-
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        System.out.println("Test");
+//    }
+//
+//    @Override
+//    public void keyTyped(KeyEvent e) {
+//        System.out.println("Test");
+//    }
+//
+//    @Override
+//    public void keyPressed(KeyEvent e) {
+//        System.out.println("Test");
+//    }
+//
+//    @Override
+//    public void keyReleased(KeyEvent e) {
+//        System.out.println("Test");
+//    }
+//
+//    @Override
+//    }
+//    public void setConnected(){
+//        System.out.println("TRUE");
+//
+//    }
+ */
 
 }//App class

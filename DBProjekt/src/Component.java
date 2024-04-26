@@ -1,13 +1,14 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Component {
+public class Component{
     int id;
     JComponent comp;
-    public Component(int id) {
-        this.id = id;
+    public Component() {
     }
     Button createButton(int id){
-        Button but = new Button(id);
+        Button but = new Button();
         comp =but.getBut();
         return but;
     }
@@ -20,7 +21,5 @@ public class Component {
     public void setId(int id) {
         this.id = id;
     }
-
-
 }
 
