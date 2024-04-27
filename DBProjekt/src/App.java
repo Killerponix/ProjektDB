@@ -3,12 +3,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Arrays;
 import java.util.concurrent.*;
 
 import static java.lang.Thread.*;
 
-public class App extends MyFrame implements Runnable, ActionListener{
+public class App extends MyFrame implements Runnable, ActionListener, ItemListener {
     public App() {
         super();
         run();
@@ -17,6 +19,7 @@ public class App extends MyFrame implements Runnable, ActionListener{
     JButton connect;
     JTextField JTFUser,JTFAdr;
     JPasswordField JTFPW;
+    JComboBox JCBTable;
     boolean connected=false;
     MySQL DB = new MySQL();
 
@@ -81,6 +84,11 @@ public class App extends MyFrame implements Runnable, ActionListener{
 
         }
 
+    }
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        Object source = e.getSource();
+        System.out.println("You are CHANGED");
     }
 
     public JButton setupbutton(int x, int y, int w, int h, String text, JButton but) {
@@ -154,19 +162,19 @@ public class App extends MyFrame implements Runnable, ActionListener{
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), "Main"));
         panel.setBounds(0,0,1280,720);
         panel.setVisible(true);
+        JCBTable = new JComboBox();
+        String s= "Ein String";
+        Object x = s.toString();
+        String s1= "Zwei String";
+        Object y = s1.toString();
+        JCBTable.addItem(x);
+        JCBTable.addItem(y);
+        JCBTable.setBounds(50,50,600,100);
+        JCBTable.setVisible(true);
+        JCBTable.addItemListener(this::itemStateChanged);
+        panel.add(JCBTable);
         return panel;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
