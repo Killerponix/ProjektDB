@@ -7,19 +7,23 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
 import java.util.concurrent.*;
-
 import static java.lang.Thread.*;
 
+
+
+
 public class App extends MyFrame implements Runnable, ActionListener, ItemListener {
+    public static final int butw = 75;
     public App() {
         super();
         run();
     }
 
-    JButton connect;
+    JButton connect,add,delete,filter,join,ct,dt,execute,edit;
     JTextField JTFUser,JTFAdr;
     JPasswordField JTFPW;
     JComboBox JCBTable;
+    JTable data;
     boolean connected=false;
     MySQL DB = new MySQL();
 
@@ -35,20 +39,27 @@ public class App extends MyFrame implements Runnable, ActionListener, ItemListen
         JFrame frame = new JFrame();
         frame = App.setupFrame(frame);
         JPanel loginpanel = new JPanel();
+        JPanel Jpmain= new JPanel();
         loginpanel =loginpanel(loginpanel);
         frame.add(loginpanel);
-        JPanel Jpmain= new JPanel();
-        while (connected == false){
-            try {
-                sleep(1000);
-                System.out.println("Login STILL");
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+//        loginpanel.updateUI();
+//        while (connected == false){
+//            try {
+//                sleep(1000);
+//                System.out.println("Login STILL");
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
         loginpanel.setVisible(false);
         Jpmain = MainPanel(Jpmain);
         frame.add(Jpmain);
+//        Container container = new Container();
+//        container.add(Jpmain);
+//        frame.setContentPane(container);
+//        container.setVisible(true);
+        Jpmain.setVisible(true);
+ //       Jpmain.updateUI();
 
         //        createGUI(App.getFrame());
 //        panel1.setupPanel(0,0,800,600);
@@ -102,12 +113,20 @@ public class App extends MyFrame implements Runnable, ActionListener, ItemListen
         //    this.but.addActionListener(this);
         but.setSize(w,h);
         but.setLocation(x, y);
-        but.setMinimumSize(new Dimension(200,80));
+        but.setMinimumSize(new Dimension(20,8));
         but.setText(text);
         //addlistener();
         but.setVisible(true);
         return but;
     }
+
+    public JTable setUPJTable (int x, int y, int w, int h,JTable table){
+        table.setBounds(x,y,w,h);
+        table.setLocation(x,y);
+        table.setVisible(true);
+        return table;
+    }
+
 
     public JPanel loginpanel(JPanel loginPanel){
         loginPanel.setBounds(0,0,922,680);
@@ -158,21 +177,73 @@ public class App extends MyFrame implements Runnable, ActionListener, ItemListen
     }
 
     public JPanel MainPanel(JPanel panel){
-        panel.setBounds(0,0,1240,680);
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), "Main"));
         panel.setBounds(0,0,1280,720);
-        panel.setVisible(true);
         JCBTable = new JComboBox();
         String s= "Ein String";
         Object x = s.toString();
         String s1= "Zwei String";
         Object y = s1.toString();
+
         JCBTable.addItem(x);
         JCBTable.addItem(y);
-        JCBTable.setBounds(50,50,600,100);
-        JCBTable.setVisible(true);
+        JCBTable.setBounds(50,50,300,100);
+        JCBTable.setLocation(50,50);
         JCBTable.addItemListener(this::itemStateChanged);
+
+        add = new JButton();
+        add = setupbutton(380,50,butw,50,"+",add);
+
+        delete = new JButton();
+        delete = setupbutton(380+butw*1,50,butw,50,"-",delete);
+
+        edit = new JButton();
+        edit = setupbutton(380+butw*2,50,butw,50,"E",edit);
+
+        filter = new JButton();
+        filter =setupbutton(380+butw*3,50,butw,50,"F",filter);
+
+        join = new JButton();
+        join =setupbutton(380+butw*4,50,butw,50,"J",join);
+
+        execute = new JButton();
+        execute =setupbutton(380+butw*5,50,butw,50,"sql",execute);
+
+        ct =new JButton();
+        ct= setupbutton(380+butw*6,50,butw,25,"CT",ct);
+
+        dt= new JButton();
+        dt= setupbutton(380+butw*6,75,butw,25,"DT",dt);
+
+        String[][] daten = new String[][]{
+                {"a", "b", "c", "d"},
+                {"e", "f", "g", "h"},
+                {"i", "j", "k", "l"}
+        };
+
+        // Die Column-Titles
+        String[] title = new String[]{
+                "A", "B", "C", "D"
+        };
+
+
+        data= new JTable(daten,title);
+
+        data= setUPJTable(50,250,1280-150,720-300,data);
+
+        panel.add(data);
+        panel.add(add);
+        panel.add(delete);
+        panel.add(edit);
+        panel.add(filter);
+        panel.add(join);
+        panel.add(execute);
+        panel.add(ct);
+        panel.add(dt);
         panel.add(JCBTable);
+        data.setVisible(true);
+        JCBTable.setVisible(true);
+//        panel.setVisible(true);
         return panel;
     }
 
